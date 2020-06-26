@@ -17,10 +17,10 @@ CHAINCODE="personal"
 FABRIC_CFG_PATH=$PWD/config/
 
 CC_RUNTIME_LANGUAGE=golang
-CC_SRC_PATH="../chaincode/${CHAINCODE}/"
+CC_SRC_PATH="chaincode/${CHAINCODE}/"
 
 echo Vendoring Go dependencies ...
-pushd ../chaincode/${CHAINCODE}
+pushd chaincode/${CHAINCODE}
 GO111MODULE=on go mod vendor
 popd
 echo Finished vendoring Go dependencies
