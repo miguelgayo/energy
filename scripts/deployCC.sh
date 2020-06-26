@@ -14,7 +14,7 @@ VERBOSE="$6"
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 CHAINCODE="market"
 
-FABRIC_CFG_PATH=$PWD/../config/
+FABRIC_CFG_PATH=$PWD/config/
 
 CC_RUNTIME_LANGUAGE=golang
 CC_SRC_PATH="../chaincode/${CHAINCODE}/"

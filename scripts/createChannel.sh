@@ -132,7 +132,7 @@ createChannelTx
 echo "### Generating channel configuration transaction '${CHANNEL_NAME}.tx' ###"
 createAncorPeerTx
 
-FABRIC_CFG_PATH=$PWD/../config/
+FABRIC_CFG_PATH=$PWD/config/
 
 ## Create channel
 echo "Creating channel "$CHANNEL_NAME
