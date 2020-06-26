@@ -1,0 +1,48 @@
+#!/bin/bash
+# import utils
+. scripts/envVar.sh
+
+CHANNEL_NAME="$1"
+CC_SRC_LANGUAGE="$2"
+VERSION="1"
+DELAY="$4"
+MAX_RETRY="$5"
+VERBOSE="$6"
+: ${CHANNEL_NAME:="mychannel"}
+: ${CC_SRC_LANGUAGE:="golang"}
+: ${VERSION:="1"}
+: ${DELAY:="3"}
+: ${MAX_RETRY:="5"}
+: ${VERBOSE:="false"}
+CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
+CHAINCODE="actual"
+
+FABRIC_CFG_PATH=$PWD/../config/
+
+joinChannel() {
+  ORG=$1
+  PEER=$2
+  setGlobals $ORG $PEER
+	local rc=1
+	local COUNTER=1
+	## Sometimes Join takes time, hence retry
+	while [ $rc -ne 0 -a $COUNTER -lt $MAX_RETRY ] ; do
+    sleep $DELAY
+    set -x
+    peer channel join -b ./channel-artifacts/$CHANNEL_NAME.block >&log.txt
+    res=$?
+    set +x
+		let rc=$res
+		COUNTER=$(expr $COUNTER + 1)
+	done
+	cat log.txt
+	echo
+	#verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME'"
+}
+
+docker-compose -f ./docker/host2.yaml up -d 2>&1
+joinChannel 1 10 #Aquí hay que ponerle el número de peer que vamos a añadir, y en consecuencia el archivo docker-compose-new-peer.yaml tiene que tener todo para ese peer
+joinChannel 1 11
+joinChannel 1 12
+joinChannel 1 13
+joinChannel 1 14

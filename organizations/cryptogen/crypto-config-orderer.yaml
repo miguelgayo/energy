@@ -1,0 +1,83 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# ---------------------------------------------------------------------------
+# "OrdererOrgs" - Definition of organizations managing orderer nodes
+# ---------------------------------------------------------------------------
+OrdererOrgs:
+  # ---------------------------------------------------------------------------
+  # Orderer
+  # ---------------------------------------------------------------------------
+  - Name: Orderer
+    Domain: example.com
+    EnableNodeOUs: true
+    # ---------------------------------------------------------------------------
+    # "Specs" - See PeerOrgs for complete description
+    # ---------------------------------------------------------------------------
+    # Specs:
+    #   - Hostname: orderer
+    #     SANS:
+    #       - localhost
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - "localhost"
+      - Hostname: orderer1
+        SANS:
+          - "localhost"   
+      - Hostname: orderer2
+        SANS:
+          - "localhost"                 
+      - Hostname: orderer3
+        SANS:
+          - "localhost"
+      - Hostname: orderer4
+        SANS:
+          - "localhost"
+      - Hostname: orderer5
+        SANS:
+          - "localhost"
+      - Hostname: orderer6
+        SANS:
+          - "localhost"                 
+      - Hostname: orderer7
+        SANS:
+          - "localhost"
+      - Hostname: orderer8
+        SANS:
+          - "localhost"
+      - Hostname: orderer9 
+        SANS:
+          - "localhost"     
+      - Hostname: orderer10
+        SANS:
+          - "localhost"
+      - Hostname: orderer11
+        SANS:
+          - "localhost"   
+      - Hostname: orderer12
+        SANS:
+          - "localhost"                 
+      - Hostname: orderer13
+        SANS:
+          - "localhost"
+      - Hostname: orderer14
+        SANS:
+          - "localhost"
+      - Hostname: orderer15
+        SANS:
+          - "localhost"
+      - Hostname: orderer16
+        SANS:
+          - "localhost"                 
+      - Hostname: orderer17
+        SANS:
+          - "localhost"
+      - Hostname: orderer18
+        SANS:
+          - "localhost"
+      - Hostname: orderer19 
+        SANS:
+          - "localhost"            
