@@ -31,32 +31,39 @@ async function main() {
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: false } });
 
-        // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        setInterval(async function () {
+            const network = await gateway.getNetwork('mychannel');
+            const contract = network.getContract('market');
 
-        // Get the contract from the network.
-        const contract = network.getContract('market');
-
-        await contract.submitTransaction('createOffer','OFFER1','-100','16','USER1',);
-        console.log('Battery read');
-        var result = await contract.evaluateTransaction('queryAllOffers');
-        await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        await contract.submitTransaction('matchOffers');
-        console.log('Battery read');
-        result = await contract.evaluateTransaction('queryAllMatches');
-        await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        await contract.submitTransaction('createUser','USER2','BERTOLDO','false');
-        console.log('Battery read');
-        result = await contract.evaluateTransaction('queryAllUsers');
-        await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        // Disconnect from the gateway.
+            
+            contract.submitTransaction('createOffer', 'OFFER1', '-100', '16', 'USER1');
+            console.log('Offer inserted');
+        }, 5000)
         setTimeout(function() {gateway.disconnect()},1000);
+
+        // var result = await contract.evaluateTransaction('queryAllOffers');
+        // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        // await contract.submitTransaction('matchOffers');
+        // console.log('Battery read');
+        // result = await contract.evaluateTransaction('queryAllMatches');
+        // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        // await contract.submitTransaction('createUser','USER2','BERTOLDO','false');
+        // console.log('Battery read');
+        // result = await contract.evaluateTransaction('queryAllUsers');
+        // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        // Disconnect from the gateway.
+        
          
 
     } catch (error) {
         console.error(`Failed to submit transaction: ${error}`);
         process.exit(1);
     }
+}
+
+async function insertOffer(network){
+    
+
 }
 
 main();
