@@ -7,6 +7,17 @@
 const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+const gateway = new Gateway();
+var T = 1;
+
+async function timestamp(){
+    var date = new Date()
+    var hour = date.getUTCHours();
+    var min = date.getMinutes()
+    var sec = date.getSeconds()
+    var ms = date.getMilliseconds()
+    process.stdout.write(hour+':'+min+':'+sec+':'+ms+' -->')
+}
 
 async function main() {
     try {
@@ -28,19 +39,25 @@ async function main() {
         }
 
         // Create a new gateway for connecting to our peer node.
-        const gateway = new Gateway();
+        //const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: false } });
-
-        setInterval(async function () {
-            const network = await gateway.getNetwork('mychannel');
-            const contract = network.getContract('market');
-
-            
-            contract.submitTransaction('createOffer', 'OFFER1', '-100', '16', 'USER1');
-            console.log('Offer inserted');
-        }, 5000)
-        setTimeout(function() {gateway.disconnect()},1000);
-
+        timestamp()
+        var wait_1=60;
+        var wait_start = setInterval(function(){
+            var date = new Date()
+            var min = date.getMinutes()
+            var wait_min = min%T;
+            var wait = T - wait_min;
+            var sec = date.getSeconds()
+            wait_1 = 60 - sec + 60*(wait-1);
+            if (wait_1 == 0 ||wait_1==T*60){
+                process.stdout.clearLine();
+                insert_offer();
+                setInterval(insert_offer,T*1000*60)
+                clearInterval(wait_start)
+            }
+        },1000)
+        
         // var result = await contract.evaluateTransaction('queryAllOffers');
         // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         // await contract.submitTransaction('matchOffers');
@@ -61,9 +78,21 @@ async function main() {
     }
 }
 
-async function insertOffer(network){
-    
-
+async function insert_offer(){
+    try{
+        timestamp()
+        const network = await gateway.getNetwork('mychannel');
+        const contract = network.getContract('market');
+        var quantity = Math.floor(Math.random() * 200 - 100) // esto simplemente simula el cálculo de una oferta
+        await contract.submitTransaction('createOffer', 'OFFER1', quantity.toString(), '16', 'USER1');
+        timestamp()
+        console.log('Offer inserted ' + quantity);
+    } catch (error){
+        console.error(`Failed to insert offer: ${error}`);
+        process.exit(1);
+    }
 }
+
+
 
 main();
