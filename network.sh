@@ -89,7 +89,7 @@ function checkPrereqs() {
   ## Check if your have cloned the peer binaries and configuration files.
   peer version > /dev/null 2>&1
 
-  if [[ $? -ne 0 || ! -d "config" ]]; then
+  if [[ $? -ne 0 ]]; then
     echo "ERROR! Peer binary and configuration files not found.."
     echo
     echo "Follow the instructions in the Fabric docs to install the Fabric Binaries:"
@@ -382,9 +382,33 @@ function upgradeCC() {
   exit 0
 }
 
-function addPeer() {
+function addHost2() {
 
-  scripts/addPeer.sh $CHANNEL_NAME $CC_SRC_LANGUAGE $VERSION $CLI_DELAY $MAX_RETRY $VERBOSE
+  scripts/addHost2.sh $CHANNEL_NAME $CC_SRC_LANGUAGE $VERSION $CLI_DELAY $MAX_RETRY $VERBOSE
+
+  if [ $? -ne 0 ]; then
+    echo "ERROR !!! Deploying chaincode failed"
+    exit 1
+  fi
+
+  exit 0
+}
+
+function addHost3() {
+
+  scripts/addHost3.sh $CHANNEL_NAME $CC_SRC_LANGUAGE $VERSION $CLI_DELAY $MAX_RETRY $VERBOSE
+
+  if [ $? -ne 0 ]; then
+    echo "ERROR !!! Deploying chaincode failed"
+    exit 1
+  fi
+
+  exit 0
+}
+
+function addHost4() {
+
+  scripts/addHost4.sh $CHANNEL_NAME $CC_SRC_LANGUAGE $VERSION $CLI_DELAY $MAX_RETRY $VERBOSE
 
   if [ $? -ne 0 ]; then
     echo "ERROR !!! Deploying chaincode failed"
@@ -547,8 +571,14 @@ elif [ "$MODE" == "deployCC" ]; then
 elif [ "$MODE" == "upgradeCC" ]; then
   echo "deploying chaincode on channel '${CHANNEL_NAME}'"
   echo
-elif [ "$MODE" == "addPeer" ]; then
-  echo "adding peer to channel '${CHANNEL_NAME}'"
+elif [ "$MODE" == "addHost2" ]; then
+  echo "adding new host to channel '${CHANNEL_NAME}'"
+  echo
+elif [ "$MODE" == "addHost3" ]; then
+  echo "adding new host to channel '${CHANNEL_NAME}'"
+  echo
+elif [ "$MODE" == "addHost3" ]; then
+  echo "adding new host to channel '${CHANNEL_NAME}'"
   echo
 else
   printHelp
@@ -563,8 +593,12 @@ elif [ "${MODE}" == "deployCC" ]; then
   deployCC
 elif [ "${MODE}" == "upgradeCC" ]; then
   upgradeCC
-elif [ "${MODE}" == "addPeer" ]; then
-  addPeer
+elif [ "${MODE}" == "addHost2" ]; then
+  addHost2
+elif [ "${MODE}" == "addHost3" ]; then
+  addHost3
+elif [ "${MODE}" == "addHost4" ]; then
+  addHost4
 elif [ "${MODE}" == "down" ]; then
   networkDown
 elif [ "${MODE}" == "restart" ]; then

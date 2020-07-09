@@ -41,8 +41,8 @@ joinChannel() {
 }
 
 docker-compose -f ./docker/host2.yaml up -d 2>&1
-joinChannel 1 10 #Aquí hay que ponerle el número de peer que vamos a añadir, y en consecuencia el archivo docker-compose-new-peer.yaml tiene que tener todo para ese peer
-joinChannel 1 11
-joinChannel 1 12
-joinChannel 1 13
-joinChannel 1 14
+
+for i in 5 6 7 8 9
+do 
+joinChannel 1 $i
+done

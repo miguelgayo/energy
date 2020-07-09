@@ -1,0 +1,235 @@
+version: '2'
+
+volumes:
+  orderer15.example.com:
+  orderer16.example.com:
+  orderer17.example.com:
+  orderer18.example.com:
+  orderer19.example.com:
+  peer15.org1.example.com:
+  peer16.org1.example.com:
+  peer17.org1.example.com:
+  peer18.org1.example.com:
+  peer19.org1.example.com:
+
+networks:
+  test:
+    external:
+      name: net_test
+
+services:
+
+  orderer15.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer15.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=7050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer15.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer15.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer15.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 7050:7050    
+
+  peer15.org1.example.com:
+    container_name: peer15.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer15.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=coucdb15:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - coucdb15
+
+  coucdb15:
+    container_name: coucdb15
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "5984:5984"
+    networks:
+      - test
+
+  orderer16.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer16.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=8050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer16.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer16.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer16.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 8050:8050      
+
+  peer16.org1.example.com:
+    container_name: peer16.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer16.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=coucdb16:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - coucdb16
+
+  coucdb16:
+    container_name: coucdb16
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "6984:5984"
+    networks:
+      - test      
+  
+  orderer17.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer17.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=9050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer17.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer17.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer17.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 9050:9050
+
+  peer17.org1.example.com:
+    container_name: peer17.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer17.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=coucdb17:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - coucdb17
+
+  coucdb17:
+    container_name: coucdb17
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "7984:5984"
+    networks:
+      - test   
+
+  orderer18.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer18.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=10050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer18.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer18.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer18.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 10050:10050
+
+  peer18.org1.example.com:
+    container_name: peer18.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer18.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=coucdb18:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - coucdb18
+
+  coucdb18:
+    container_name: coucdb18
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "8984:5984"
+    networks:
+      - test   
+
+  orderer19.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer19.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=11050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer19.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer19.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer19.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 11050:11050
+
+  peer19.org1.example.com:
+    container_name: peer19.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer19.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=coucdb19:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - coucdb19
+
+  coucdb19:
+    container_name: coucdb19
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "9984:5984"
+    networks:
+      - test  
