@@ -14,17 +14,6 @@ VERBOSE="$6"
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 CHAINCODE="market"
 
-FABRIC_CFG_PATH=$PWD/config/
-
-CC_RUNTIME_LANGUAGE=golang
-CC_SRC_PATH="chaincode/${CHAINCODE}/"
-
-echo Vendoring Go dependencies ...
-pushd chaincode/${CHAINCODE}
-GO111MODULE=on go mod vendor
-popd
-echo Finished vendoring Go dependencies
-
 # import utils
 . scripts/envVar.sh
 
@@ -220,6 +209,19 @@ chaincodeQuery() {
   fi
 }
 
+for CHAINCODE in "personal" "market" "actual"
+do
+FABRIC_CFG_PATH=$PWD/config/
+
+CC_RUNTIME_LANGUAGE=golang
+CC_SRC_PATH="chaincode/${CHAINCODE}/"
+
+echo Vendoring Go dependencies ...
+pushd chaincode/${CHAINCODE}
+GO111MODULE=on go mod vendor
+popd
+echo Finished vendoring Go dependencies
+
 ## at first we package the chaincode
 packageChaincode 1
 
@@ -257,5 +259,5 @@ sleep 10
 # Query chaincode on peer0.org1
 echo "Querying chaincode on peer0.org1..."
 chaincodeQuery 1
+done 
 
-exit 0

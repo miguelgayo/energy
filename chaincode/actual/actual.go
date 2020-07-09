@@ -14,7 +14,7 @@ package main
 
 
 float read() {
-	char* hostname ="192.168.1.45";
+	char* hostname ="192.168.0.2";
 	int tcpPort = 102;
 	IedClientError error;
 	IedConnection con = IedConnection_create();
@@ -90,6 +90,23 @@ func (s *SmartContract) ReadBattery(ctx contractapi.TransactionContextInterface,
 	userAsBytes, _ = json.Marshal(user)
 
 	return ctx.GetStub().PutState(userNumber, userAsBytes)
+}
+
+func (s *SmartContract) QueryUser(ctx contractapi.TransactionContextInterface, userNumber string) (*User, error) {
+	userAsBytes, err := ctx.GetStub().GetState(userNumber)
+
+	if err != nil {
+		return nil, fmt.Errorf("Failed to read from world state. %s", err.Error())
+	}
+
+	if userAsBytes == nil {
+		return nil, fmt.Errorf("%s does not exist", userNumber)
+	}
+
+	user := new(User)
+	_ = json.Unmarshal(userAsBytes, user)
+
+	return user, nil
 }
 
 // QueryAllUsers returns all users found in world state
