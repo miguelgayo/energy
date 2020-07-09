@@ -17,7 +17,7 @@ VERBOSE="$6"
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 CHAINCODE="actual"
 
-FABRIC_CFG_PATH=$PWD/../config/
+export FABRIC_CFG_PATH=${PWD}/configtx
 
 joinChannel() {
   ORG=$1
