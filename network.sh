@@ -577,7 +577,7 @@ elif [ "$MODE" == "addHost2" ]; then
 elif [ "$MODE" == "addHost3" ]; then
   echo "adding new host to channel '${CHANNEL_NAME}'"
   echo
-elif [ "$MODE" == "addHost3" ]; then
+elif [ "$MODE" == "addHost4" ]; then
   echo "adding new host to channel '${CHANNEL_NAME}'"
   echo
 else
