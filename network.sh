@@ -422,7 +422,7 @@ function addHost4() {
 # Tear down running network
 function networkDown() {
   # stop containers org1
-  docker-compose -f $COMPOSE_FILE_BASE -f $COMPOSE_FILE_CA  -f docker/host2.yaml -f docker/host3.yamls -f docker/host4.yaml down --volumes --remove-orphans
+  docker-compose -f $COMPOSE_FILE_BASE -f $COMPOSE_FILE_CA  -f docker/host2.yaml -f docker/host3.yaml -f docker/host4.yaml down --volumes --remove-orphans
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
     # Bring down the network, deleting the volumes
