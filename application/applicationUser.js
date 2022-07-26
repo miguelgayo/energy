@@ -8,7 +8,7 @@ const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 const gateway = new Gateway();
-var T = 1;
+var T = 5;
 const user = process.argv[2]
 
 async function timestamp(){
