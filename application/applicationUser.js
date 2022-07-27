@@ -8,7 +8,7 @@ const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 const gateway = new Gateway();
-var T = 5;
+var T = 1;
 const user = process.argv[2]
 
 async function timestamp(){
@@ -41,7 +41,7 @@ async function main() {
 
         // Create a new gateway for connecting to our peer node.
         //const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: false } });
+        await gateway.connect(ccp, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
         timestamp()
         console.log('Started application of user'+user)
         var wait_1=60;
@@ -60,10 +60,12 @@ async function main() {
             }
         },1000)
         
-        // var result = await contract.evaluateTransaction('queryAllOffers');
-        // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        // await contract.submitTransaction('matchOffers');
-        // console.log('Battery read');
+	//const network = await gateway.getNetwork('mychannel');
+        //const contract = network.getContract('market');
+         //var result = await contract.evaluateTransaction('queryAllOffers');
+         //await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+         //await contract.submitTransaction('matchOffers');
+         //console.log('Battery read');
         // result = await contract.evaluateTransaction('queryAllMatches');
         // await console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         // await contract.submitTransaction('createUser','USER2','BERTOLDO','false');

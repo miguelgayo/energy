@@ -227,32 +227,32 @@ packageChaincode 1
 
 ## Install chaincode on peer0.org1 and peer0.org2
 echo "Installing chaincode on peer0.org1..."
-for i in 5 
+for i in 0 2 3 4  
 do 
 installChaincode 1 $i
 done
 ## query whether the chaincode is installed
-#queryInstalled 1
+queryInstalled 1
 
 ## approve the definition for org1
-#approveForMyOrg 1
+approveForMyOrg 1
 
 ## check whether the chaincode definition is ready to be committed
 ## expect org1 to have approved and org2 not to
-#checkCommitReadiness 1 "\"Org1MSP\": true" 
+checkCommitReadiness 1 "\"Org1MSP\": true" 
 
 
 ## check whether the chaincode definition is ready to be committed
 ## expect them both to have approved
-#sleep 5
+sleep 5
 ## now that we know for sure both orgs have approved, commit the definition
-#commitChaincodeDefinition 1 
+commitChaincodeDefinition 1 
 
 ## query on both orgs to see that the definition committed successfully
 #queryCommitted 1
 
 ## Invoke the chaincode
-#chaincodeInvokeInit 1 
+chaincodeInvokeInit 1 
 
 #sleep 10
 

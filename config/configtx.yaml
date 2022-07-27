@@ -78,7 +78,7 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.org1.example.com
               Port: 7051
-            - Host: peer10.org1.example.com
+            - Host: peer5.org1.example.com
               Port: 7051
 
 
