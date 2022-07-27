@@ -1,3 +1,6 @@
 git add --all
 git commit -m "nombre del commit"
 git push origin master
+nano ~/.git-credentials
+
+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
