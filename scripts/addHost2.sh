@@ -41,7 +41,7 @@ joinChannel() {
 	#verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME'"
 }
 
-#docker-compose -f ./docker/host2.yaml up -d 2>&1
+docker-compose -f ./docker/host2.yaml up -d 2>&1
 
 for i in 6 7 
 do 

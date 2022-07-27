@@ -3,4 +3,4 @@
 3. En el resto de equipos ejecutamos la salida del paso dos + --advertise-addr <host n ip>
 4. En cualquier equipo: docker network create --attachable --driver overlay net_test #esto lo tengo para que se haga automáticamente en el script de inicializar
 
-docker swarm join --token SWMTKN-1-2kfa27n722lk7r15pa6w6ia9lpeu1jrc8pu6k1am1c2kqztkvb-8rqc9xr5gdqd4b13ynrfeod0j 192.168.0.3:2377
+docker swarm join --token SWMTKN-1-2fh0twqdu6jeq60xgxyy85wrla5gvz99fg0tbjq43wtxj5kjwv-ctn3929w1qshob6vxgxfnsjlx 192.168.11.4:2377

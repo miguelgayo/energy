@@ -2,10 +2,16 @@ version: '2'
 
 volumes:
   orderer5.example.com:
+  orderer6.example.com:
+  orderer7.example.com:
+  orderer8.example.com:
+  orderer9.example.com:
+  orderer10.example.com:
   peer5.org1.example.com:
   peer6.org1.example.com:
   peer7.org1.example.com:
   peer8.org1.example.com:
+  peer9.org1.example.com:
 
 networks:
   test:
@@ -29,7 +35,75 @@ services:
         - ../organizations/ordererOrganizations/example.com/orderers/orderer5.example.com/tls/:/var/hyperledger/orderer/tls
         - orderer5.example.com:/var/hyperledger/production/orderer
     ports:
-    - 7050:7050    
+    - 7050:7050
+
+  orderer6.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer6.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=8050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer6.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer6.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer6.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 8050:8050
+
+  orderer7.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer7.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=9050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer7.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer7.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer7.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 9050:9050
+
+  orderer8.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer8.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=10050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer8.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer8.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer8.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 10050:10050    
+
+  orderer9.example.com:
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    container_name: orderer9.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENPORT=11050
+    networks:
+    - test
+    volumes:
+        - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer9.example.com/msp:/var/hyperledger/orderer/msp
+        - ../organizations/ordererOrganizations/example.com/orderers/orderer9.example.com/tls/:/var/hyperledger/orderer/tls
+        - orderer9.example.com:/var/hyperledger/production/orderer
+    ports:
+    - 11050:11050  
 
   peer5.org1.example.com:
     container_name: peer5.org1.example.com
@@ -134,3 +208,30 @@ services:
       - "8984:5984"
     networks:
       - test   
+
+  peer9.org1.example.com:
+    container_name: peer9.org1.example.com
+    extends:
+      file:  docker-compose-base.yaml
+      service: peer9.org1.example.com
+    networks:
+      - test
+    environment:
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb9:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    depends_on:
+      - couchdb9
+
+  couchdb9:
+    container_name: couchdb9
+    image: couchdb:2.3
+    environment:
+      - COUCHDB_USER=
+      - COUCHDB_PASSWORD=
+    ports:
+      - "9984:5984"
+    networks:
+      - test  
+
