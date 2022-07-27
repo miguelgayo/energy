@@ -225,50 +225,9 @@ Orderer: &OrdererDefaults
           Port: 10050
           ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer8.example.com/tls/server.crt
           ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer8.example.com/tls/server.crt
-        # - Host: orderer9.example.com
-        #   Port: 11050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer9.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer9.example.com/tls/server.crt
-        # - Host: orderer10.example.com
-        #   Port: 7050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer10.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer10.example.com/tls/server.crt
-        # - Host: orderer11.example.com
-        #   Port: 8050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer11.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer11.example.com/tls/server.crt
-        # - Host: orderer12.example.com
-        #   Port: 9050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer12.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer12.example.com/tls/server.crt
-        # - Host: orderer13.example.com
-        #   Port: 10050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer13.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer13.example.com/tls/server.crt
-        # - Host: orderer14.example.com
-        #   Port: 11050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer14.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer14.example.com/tls/server.crt
-        # - Host: orderer15.example.com
-        #   Port: 7050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer15.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer15.example.com/tls/server.crt
-        # - Host: orderer16.example.com
-        #   Port: 8050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer16.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer16.example.com/tls/server.crt
-        # - Host: orderer17.example.com
-        #   Port: 9050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer17.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer17.example.com/tls/server.crt
-        # - Host: orderer18.example.com
-        #   Port: 10050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer18.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer18.example.com/tls/server.crt
-        # - Host: orderer19.example.com
-        #   Port: 11050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer19.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer19.example.com/tls/server.crt          
+        - Host: orderer9.example.com
+          Port: 11050
+     
     Addresses:
         - orderer.example.com:7050
         - orderer1.example.com:8050
@@ -279,17 +238,7 @@ Orderer: &OrdererDefaults
         - orderer6.example.com:8050
         - orderer7.example.com:9050
         - orderer8.example.com:10050
-        - orderer9.example.com:11050
-        - orderer10.example.com:7050
-        - orderer11.example.com:8050
-        - orderer12.example.com:9050
-        - orderer13.example.com:10050
-        - orderer14.example.com:11050
-        - orderer15.example.com:7050
-        - orderer16.example.com:8050
-        - orderer17.example.com:9050
-        - orderer18.example.com:10050
-        - orderer19.example.com:11050        
+        - orderer9.example.com:11050       
 
 
     
