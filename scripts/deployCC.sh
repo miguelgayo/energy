@@ -12,7 +12,7 @@ VERBOSE="$6"
 : ${MAX_RETRY:="5"}
 : ${VERBOSE:="false"}
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
-CHAINCODE="market"
+CHAINCODE="cluster"
 
 # import utils
 . scripts/envVar.sh
@@ -209,7 +209,7 @@ chaincodeQuery() {
   fi
 }
 
-for CHAINCODE in "personal" "actual" "market"
+for CHAINCODE in  "cluster" "community"
 do
 FABRIC_CFG_PATH=$PWD/config/
 
@@ -227,11 +227,11 @@ packageChaincode 1
 
 ## Install chaincode on peer0.org1 and peer0.org2
 echo "Installing chaincode on peer0.org1..."
-for i in 0 2 3 4  
+for i in 0
 do 
 installChaincode 1 $i
 done
-## query whether the chaincode is installed
+# query whether the chaincode is installed
 queryInstalled 1
 
 ## approve the definition for org1
@@ -246,10 +246,10 @@ checkCommitReadiness 1 "\"Org1MSP\": true"
 ## expect them both to have approved
 sleep 5
 ## now that we know for sure both orgs have approved, commit the definition
-commitChaincodeDefinition 1 
+#commitChaincodeDefinition 1 
 
 ## query on both orgs to see that the definition committed successfully
-#queryCommitted 1
+queryCommitted 1
 
 ## Invoke the chaincode
 chaincodeInvokeInit 1 

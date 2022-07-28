@@ -24,7 +24,7 @@
     },
     "peers": {
         "peer0.org${ORG}.example.com": {
-            "url": "grpcs://192.168.0.3:${P0PORT}",
+            "url": "grpcs://192.168.11.2:${P0PORT}",
             "tlsCACerts": {
                 "pem": "${PEERPEM}"
             },
